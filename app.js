@@ -5,12 +5,24 @@ const input = document.createElement('form');
 app.appendChild(input);
 
 const red = document.createElement('input');
+red.setAttribute('type', 'range');
+red.setAttribute('min', '0');
+red.setAttribute('max', '255');
+red.setAttribute('value', '0');
 input.appendChild(red);
 
 const green = document.createElement('input');
+green.setAttribute('type', 'range');
+green.setAttribute('min', '0');
+green.setAttribute('max', '255');
+green.setAttribute('value', '0');
 input.appendChild(green);
 
 const blue = document.createElement('input');
+blue.setAttribute('type', 'range');
+blue.setAttribute('min', '0');
+blue.setAttribute('max', '255');
+blue.setAttribute('value', '0');
 input.appendChild(blue);
 
 
