@@ -10,3 +10,7 @@ body {
   height: 100vh;
   padding: 1rem;
 }
+
+#rgb input {
+  display: block;
+}
