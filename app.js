@@ -49,17 +49,36 @@ input.appendChild(blue);
 
 function updateColors() {
   values = {
-    red: red.value,
-    green: green.value,
-    blue: blue.value,
+    red: {
+      rgb: red.value,
+      hex: Number(red.value).toString(16),
+    },
+    green: {
+      rgb: green.value,
+      hex: Number(green.value).toString(16),
+    },
+    blue: {
+      rgb: blue.value,
+      hex: Number(blue.value).toString(16),
+    },
   }
-  redy = red.value > 255 ? red.value % 255 : red.value;
-  greeny = green.value > 255 ? green.value % 255 : green.value;
-  bluey = blue.value > 255 ? blue.value % 255 : blue.value;
 
-  app.style.background = `rgb(${redy || 0},${greeny || 0},${bluey || 0})`;
+  console.log(values);
+
+  const rgb = `rgb(${values.red.rgb || 0}, ${values.green.rgb || 0}, ${values.blue.rgb || 0})`
+  const hex = `#${values.red.hex.length > 1 ? values.red.hex : '0' + values.red.hex}${values.green.hex.length > 1 ? values.green.hex : '0' + values.green.hex}${values.blue.hex.length > 1 ? values.blue.hex : '0' + values.blue.hex}`
+
+  app.style.background = rgb;
+  rgbValues.innerText = rgb;
+  hexValues.innerText = hex;
 }
 
 red.addEventListener('change', updateColors);
 green.addEventListener('change', updateColors);
 blue.addEventListener('change', updateColors);
+
+const rgbValues = document.createElement('div');
+app.appendChild(rgbValues);
+
+const hexValues = document.createElement('div');
+app.appendChild(hexValues);
