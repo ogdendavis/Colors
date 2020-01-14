@@ -8,6 +8,7 @@ body {
   width: 100vw;
   height: 100vh;
   display: grid;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .app__container {
@@ -16,12 +17,18 @@ body {
   padding: 2rem;
 }
 
-.app__input, .app__output {
+.app__input {
   margin: 1rem;
+}
+
+.app__output {
+  margin: 1rem;
+  line-height: 1.5;
 }
 
 .app__input input {
   display: block;
+  margin-bottom: 0.5rem;
 }
 
 .app__swatch {
