@@ -46,39 +46,41 @@ blueLabel.innerText = 'Blue';
 input.appendChild(blueLabel);
 input.appendChild(blue);
 
-
-function updateColors() {
-  values = {
-    red: {
-      rgb: red.value,
-      hex: Number(red.value).toString(16),
-    },
-    green: {
-      rgb: green.value,
-      hex: Number(green.value).toString(16),
-    },
-    blue: {
-      rgb: blue.value,
-      hex: Number(blue.value).toString(16),
-    },
-  }
-
-  console.log(values);
-
-  const rgb = `rgb(${values.red.rgb || 0}, ${values.green.rgb || 0}, ${values.blue.rgb || 0})`
-  const hex = `#${values.red.hex.length > 1 ? values.red.hex : '0' + values.red.hex}${values.green.hex.length > 1 ? values.green.hex : '0' + values.green.hex}${values.blue.hex.length > 1 ? values.blue.hex : '0' + values.blue.hex}`
-
-  app.style.background = rgb;
-  rgbValues.innerText = rgb;
-  hexValues.innerText = hex;
-}
-
-red.addEventListener('change', updateColors);
-green.addEventListener('change', updateColors);
-blue.addEventListener('change', updateColors);
-
 const rgbValues = document.createElement('div');
 app.appendChild(rgbValues);
 
 const hexValues = document.createElement('div');
 app.appendChild(hexValues);
+
+
+function updateColors() {
+  values = {
+    rgb: {
+      red: red.value,
+      green: green.value,
+      blue: blue.value
+    },
+    hex: {
+      red: Number(red.value).toString(16),
+      green: Number(green.value).toString(16),
+      blue: Number(blue.value).toString(16),
+    }
+  }
+
+  const rgb = `rgb(${values.rgb.red || 0}, ${values.rgb.green || 0}, ${values.rgb.blue || 0})`
+  const hex = `#${values.hex.red.length > 1 ? values.hex.red : '0' + values.hex.red}${values.hex.green.length > 1 ? values.hex.green : '0' + values.hex.green}${values.hex.blue.length > 1 ? values.hex.blue : '0' + values.hex.blue}`
+
+
+
+
+
+  app.style.background = rgb;
+  rgbValues.innerText = rgb;
+  hexValues.innerText = hex;
+
+  console.log(values);
+}
+
+red.addEventListener('change', updateColors);
+green.addEventListener('change', updateColors);
+blue.addEventListener('change', updateColors);
