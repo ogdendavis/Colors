@@ -59,6 +59,10 @@ blueLabel.innerText = 'Blue';
 input.appendChild(blueLabel);
 input.appendChild(blue);
 
+const colorSwatch = document.createElement('div');
+colorSwatch.classList.add('app__swatch');
+output.appendChild(colorSwatch);
+
 const rgbValues = document.createElement('div');
 output.appendChild(rgbValues);
 
@@ -95,14 +99,15 @@ function updateColors() {
 }
 
 function displayColors(values) {
-  const rgb = `rgb(${values.rgb.red || 0}, ${values.rgb.green || 0}, ${values.rgb.blue || 0})`
-  const hex = `#${values.hex.red.length > 1 ? values.hex.red : '0' + values.hex.red}${values.hex.green.length > 1 ? values.hex.green : '0' + values.hex.green}${values.hex.blue.length > 1 ? values.hex.blue : '0' + values.hex.blue}`
-  const hsl = `hsl(${values.hsl.h}, ${values.hsl.s}%, ${values.hsl.l}%)`;
-
-  app.style.background = rgb;
+  const rgb = `rgb(${values.rgb.red || 0}, ${values.rgb.green || 0}, ${values.rgb.blue || 0})`;
+  colorSwatch.style.background = rgb;
   rgbValues.innerText = rgb;
-  hexValues.innerText = hex;
-  hslValues.innerText = hsl;
+
+  app.style.background = `linear-gradient(to top left, rgba(${values.rgb.red || 0}, ${values.rgb.green || 0}, ${values.rgb.blue || 0}, 0.25), ${rgb}`;
+
+  hexValues.innerText = `#${values.hex.red.length > 1 ? values.hex.red : '0' + values.hex.red}${values.hex.green.length > 1 ? values.hex.green : '0' + values.hex.green}${values.hex.blue.length > 1 ? values.hex.blue : '0' + values.hex.blue}`;
+
+  hslValues.innerText = `hsl(${values.hsl.h}, ${values.hsl.s}%, ${values.hsl.l}%)`;
 }
 
 function calcHsl(values) {
@@ -144,7 +149,7 @@ window.onload = function() {
   const r = Math.floor(Math.random() * 256).toString();
   const g = Math.floor(Math.random() * 256).toString();
   const b = Math.floor(Math.random() * 256).toString();
-  
+
   initColors({
     rgb: {
       red: r,
