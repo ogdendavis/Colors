@@ -1,8 +1,13 @@
 const app = document.querySelector('.app');
 
+const controls = document.createElement('div');
+controls.classList.add('app__controls');
+app.appendChild(controls);
+
 const input = document.createElement('form');
 input.id = 'rgb';
-app.appendChild(input);
+input.classList.add('app__input');
+controls.appendChild(input);
 
 const red = document.createElement('input');
 red.setAttribute('name', 'red');
@@ -47,13 +52,13 @@ input.appendChild(blueLabel);
 input.appendChild(blue);
 
 const rgbValues = document.createElement('div');
-app.appendChild(rgbValues);
+controls.appendChild(rgbValues);
 
 const hexValues = document.createElement('div');
-app.appendChild(hexValues);
+controls.appendChild(hexValues);
 
 const hslValues = document.createElement('div');
-app.appendChild(hslValues);
+controls.appendChild(hslValues);
 
 function updateColors() {
   values = {
