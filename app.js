@@ -99,13 +99,15 @@ function hslCalc(values) {
   const ratioMin = Math.min(redRatio, greenRatio, blueRatio);
   const lRatio = (ratioMax + ratioMin) / 2;
   const sRatio = ratioMax === ratioMin ? 0 :
-                    lRatio > 0.5 ? (ratioMax - ratioMin)/(2 - ratioMax - ratioMin) :
-                                   (ratioMax - ratioMin)/(ratioMax + ratioMin);
-  const hRatio = redRatio === ratioMax ? (greenRatio - blueRatio) / (ratioMax - ratioMin) :
-           greenRatio === ratioMax ? 2 + (blueRatio - redRatio) / (ratioMax - ratioMin) :
-             blueRatio === ratioMax ? 4 + (redRatio - greenRatio) / (ratioMax - ratioMin) : 0;
+                 lRatio > 0.5 ? (ratioMax - ratioMin)/(2 - ratioMax - ratioMin) :
+                 (ratioMax - ratioMin)/(ratioMax + ratioMin);
+  const hRatio = ratioMax === ratioMin ? 0 :
+                 redRatio === ratioMax ? (greenRatio - blueRatio) / (ratioMax - ratioMin) :
+                 greenRatio === ratioMax ? 2 + (blueRatio - redRatio) / (ratioMax - ratioMin) :
+                 4 + (redRatio - greenRatio) / (ratioMax - ratioMin);
+
   return {
-    h: Math.round(hRatio * 60),
+    h: hRatio >= 0 ? Math.round(hRatio * 60) : Math.round(hRatio * 60) + 360,
     s: Math.round(sRatio * 100),
     l: Math.round(lRatio * 100),
   }
