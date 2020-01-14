@@ -68,6 +68,16 @@ output.appendChild(hexValues);
 const hslValues = document.createElement('div');
 output.appendChild(hslValues);
 
+function initColors(values) {
+  red.value = values.rgb.red;
+  green.value = values.rgb.green;
+  blue.value = values.rgb.blue;
+
+  hexValues.innerText = 'hi!';
+
+  updateColors();
+}
+
 function updateColors() {
   values = {
     rgb: {
@@ -75,22 +85,16 @@ function updateColors() {
       green: green.value,
       blue: blue.value
     },
-    hex: {
-      red: Number(red.value).toString(16),
-      green: Number(green.value).toString(16),
-      blue: Number(blue.value).toString(16),
-    },
   }
-
-
-  values.hsl = hslCalc(values);
+  values.hex = calcHex(values);
+  values.hsl = calcHsl(values);
 
   console.log(values);
 
-  setColors(values);
+  displayColors(values);
 }
 
-function setColors(values) {
+function displayColors(values) {
   const rgb = `rgb(${values.rgb.red || 0}, ${values.rgb.green || 0}, ${values.rgb.blue || 0})`
   const hex = `#${values.hex.red.length > 1 ? values.hex.red : '0' + values.hex.red}${values.hex.green.length > 1 ? values.hex.green : '0' + values.hex.green}${values.hex.blue.length > 1 ? values.hex.blue : '0' + values.hex.blue}`
   const hsl = `hsl(${values.hsl.h}, ${values.hsl.s}%, ${values.hsl.l}%)`;
@@ -101,7 +105,7 @@ function setColors(values) {
   hslValues.innerText = hsl;
 }
 
-function hslCalc(values) {
+function calcHsl(values) {
   // Figuring out HSL. Based on http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/
   const redRatio = Number(values.rgb.red) / 255;
   const greenRatio = Number(values.rgb.green) / 255;
@@ -124,6 +128,28 @@ function hslCalc(values) {
   }
 }
 
+function calcHex(values) {
+  return {
+    red: Number(values.rgb.red).toString(16),
+    green: Number(values.rgb.green).toString(16),
+    blue: Number(values.rgb.blue).toString(16),
+  }
+}
+
 red.addEventListener('change', updateColors);
 green.addEventListener('change', updateColors);
 blue.addEventListener('change', updateColors);
+
+window.onload = function() {
+  const r = Math.floor(Math.random() * 256).toString();
+  const g = Math.floor(Math.random() * 256).toString();
+  const b = Math.floor(Math.random() * 256).toString();
+  
+  initColors({
+    rgb: {
+      red: r,
+      green: g.toString(),
+      blue: b.toString(),
+    }
+  });
+}
