@@ -1,7 +1,6 @@
 body {
   margin: 0;
   padding: 0;
-  background: #ddd;
   color: #333;
 }
 
@@ -11,10 +10,14 @@ body {
   display: grid;
 }
 
-.app__controls {
+.app__container {
   margin: auto;
   background: #ffffff88;
   padding: 2rem;
+}
+
+.app__input, .app__output {
+  margin: 1rem;
 }
 
 .app__input input {

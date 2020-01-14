@@ -1,8 +1,16 @@
 const app = document.querySelector('.app');
 
+const container = document.createElement('div');
+container.classList.add('app__container');
+app.appendChild(container);
+
 const controls = document.createElement('div');
 controls.classList.add('app__controls');
-app.appendChild(controls);
+container.appendChild(controls);
+
+const output = document.createElement('div');
+output.classList.add('app__output');
+container.appendChild(output);
 
 const input = document.createElement('form');
 input.id = 'rgb';
@@ -52,13 +60,13 @@ input.appendChild(blueLabel);
 input.appendChild(blue);
 
 const rgbValues = document.createElement('div');
-controls.appendChild(rgbValues);
+output.appendChild(rgbValues);
 
 const hexValues = document.createElement('div');
-controls.appendChild(hexValues);
+output.appendChild(hexValues);
 
 const hslValues = document.createElement('div');
-controls.appendChild(hslValues);
+output.appendChild(hslValues);
 
 function updateColors() {
   values = {
@@ -71,23 +79,26 @@ function updateColors() {
       red: Number(red.value).toString(16),
       green: Number(green.value).toString(16),
       blue: Number(blue.value).toString(16),
-    }
+    },
   }
 
+
+  values.hsl = hslCalc(values);
+
+  console.log(values);
+
+  setColors(values);
+}
+
+function setColors(values) {
   const rgb = `rgb(${values.rgb.red || 0}, ${values.rgb.green || 0}, ${values.rgb.blue || 0})`
   const hex = `#${values.hex.red.length > 1 ? values.hex.red : '0' + values.hex.red}${values.hex.green.length > 1 ? values.hex.green : '0' + values.hex.green}${values.hex.blue.length > 1 ? values.hex.blue : '0' + values.hex.blue}`
-
-  const hslRaw = hslCalc(values);
-  values.hsl = hslRaw;
-  const hsl = `hsl(${hslRaw.h}, ${hslRaw.s}%, ${hslRaw.l}%)`;
-
+  const hsl = `hsl(${values.hsl.h}, ${values.hsl.s}%, ${values.hsl.l}%)`;
 
   app.style.background = rgb;
   rgbValues.innerText = rgb;
   hexValues.innerText = hex;
   hslValues.innerText = hsl;
-
-  console.log(values);
 }
 
 function hslCalc(values) {
